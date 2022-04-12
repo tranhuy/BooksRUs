@@ -17,10 +17,10 @@ const authLink = setContext((_, { headers }) => {
     }
 })
 
-const httpLink = new HttpLink( { uri: 'http://localhost:4000/graphql' })
+const httpLink = new HttpLink( { uri: 'https://api-books-r-us.herokuapp.com/graphql' })
 
 const wsLink = new WebSocketLink({
-    uri: 'ws://localhost:4000/subscriptions',
+    uri: 'ws://api-books-r-us.herokuapp.com/subscriptions',
     options: {
         reconnect: true
     }
