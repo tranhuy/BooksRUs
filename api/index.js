@@ -1,4 +1,4 @@
-const { createServer } = require('http')
+const http = require('http')
 const express = require('express')
 const { execute, subscribe } = require('graphql')
 const { SubscriptionServer } = require('subscriptions-transport-ws')
@@ -253,7 +253,7 @@ const resolvers = {
   const PORT = process.env.PORT || 4000
   const app = express()
 
-  const httpServer = createServer(app)
+  const httpServer = http.createServer(app)
   const schema = makeExecutableSchema({ typeDefs, resolvers })
 
   const subscriptionServer = SubscriptionServer.create(
@@ -306,5 +306,11 @@ const resolvers = {
 
   httpServer.listen(PORT, () => {
     console.log(`Server is now running on http://localhost:${PORT}${server.graphqlPath}`)
+    
+    // issues ping to server to prevent Heroku dynos from sleeping
+    setInterval(() => {
+      console.log(`Pinging ${process.env.APP_URL}`);
+      http.get(process.env.APP_URL);   
+    }, 600000);
   })
 })();
