@@ -307,7 +307,7 @@ const resolvers = {
   httpServer.listen(PORT, () => {
     console.log(`Server is now running on http://localhost:${PORT}${server.graphqlPath}`)
     
-    // issues ping to server to prevent Heroku dynos from sleeping
+    // issues ping to server to prevent Heroku dynos from sleeping.
     // setInterval(() => {
     //   console.log(`Pinging ${process.env.APP_URL}`);
     //   http.get(process.env.APP_URL);   
